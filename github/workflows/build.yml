@@ -8,14 +8,14 @@ on:
 
 jobs:
   build:
-    # Menggunakan OS runner versi terbaru yang stabil
     runs-on: ubuntu-latest
 
     steps:
+    # 1. HARUS PALING ATAS: Mengambil/men-download file dari repository Anda dulu
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 1. Menentukan Versi Java (JDK 17 adalah standar wajib untuk Android Studio modern)
+    # 2. Baru setelah itu setup Java & cache Gradle
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -23,18 +23,19 @@ jobs:
         java-version: '17'
         cache: 'gradle'
 
-    # 2. Memberikan izin eksekusi pada Gradle wrapper
+    # 3. Memberikan izin eksekusi pada Gradle wrapper
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    # 3. Menjalankan proses Build Debug APK menggunakan Gradle
-    - name: Build APK with Gradle
+    # 4. Menjalankan proses Build Debug APK
+    - name: Build Debug APK with Gradle
       run: ./gradlew assembleDebug
 
-    # 4. Menyimpan file APK hasil build agar bisa di-download lewat tab Actions
+    # 5. Menyimpan file APK hasil build
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: app-debug-apk
         path: app/build/outputs/apk/debug/app-debug.apk
+        
         
