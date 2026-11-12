@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Taxee Helper</string>
+    <string name="accessibility_service_description">Aplikasi pendamping untuk mendeteksi dan mengklik orderan terdekat secara otomatis.</string>
+</resources>
