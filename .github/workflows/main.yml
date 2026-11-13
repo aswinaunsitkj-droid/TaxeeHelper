@@ -19,8 +19,12 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    # Menggunakan perintah gradle langsung tanpa file gradlew
-    - name: Build Debug APK with Gradle CLI
+    # Menggunakan Action resmi untuk setup dan build Gradle secara otomatis
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    # Perintah build standar yang kini didukung penuh oleh action di atas
+    - name: Build Debug APK with Gradle
       run: gradle assembleDebug
 
     - name: Upload APK Artifact
